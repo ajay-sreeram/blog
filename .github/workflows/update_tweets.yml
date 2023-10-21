@@ -15,6 +15,11 @@ jobs:
         python-version: '3.x'
     - name: Set up environment
       run: echo "NOTION_SECRET=${{ secrets.NOTION_SECRET }}" >> $GITHUB_ENV
+    - name: Install dependencies
+      run: |
+        pip install requests
+        pip install json
+        pip install urllib
     - name: Fetch and Update Tweets
       run: python fetch_tweets.py
     - name: Commit and Push
