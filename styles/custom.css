@@ -1,10 +1,12 @@
-/* .md-sidebar--primary {
-    display: none !important;
+@media (min-width:769px) {
+    .md-sidebar--primary {
+        display: none !important;
+    }
+    .md-content{
+        margin-left: 10%;
+    }    
 }
 
-.md-content{
-    margin-left: 10%;
-} */
 
 a {
     color: black !important;
