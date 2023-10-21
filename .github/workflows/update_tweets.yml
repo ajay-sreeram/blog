@@ -1,0 +1,23 @@
+name: Update Top 5 Liked Tweets
+on:
+  schedule:
+    - cron: '0 * * * *' # Every hour
+
+jobs:
+  fetch-tweets:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Fetch and Update Tweets
+      run: python fetch_tweets.py
+    - name: Commit and Push
+      run: |
+        git config --global user.name 'GitHub Action'
+        git config --global user.email 'github.action@github.com'
+        git add .
+        git commit -m "Update Top 5 Liked Tweets"
+        git push
