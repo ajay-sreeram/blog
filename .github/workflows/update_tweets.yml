@@ -2,6 +2,7 @@ name: Update Top 5 Liked Tweets
 on:
   schedule:
     - cron: '0 * * * *' # Every hour
+  workflow_dispatch:
 
 jobs:
   fetch-tweets:
