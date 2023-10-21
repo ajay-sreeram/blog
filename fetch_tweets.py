@@ -1,7 +1,7 @@
-import requests, json, urllib
+import requests, json, urllib, os
 
 top_k = 5
-token = 'secret_Cbc4c72gxHWRiL0B3fg29GjHwW5SnIeZTxpUkFkqACW'
+token = os.getenv('NOTION_SECRET', '').strip()
 databaseID ="060af882b1024f73a172515e2089c615"
 headers = {
     "Authorization": "Bearer " + token,
@@ -10,6 +10,8 @@ headers = {
 }
 
 def readDatabase(databaseID, headers):
+    if not token:
+        return None
     readUrl = f"https://api.notion.com/v1/databases/{databaseID}/query"
     res = requests.request("POST", readUrl, headers=headers)
     data = res.json()
@@ -22,7 +24,8 @@ def readDatabase(databaseID, headers):
 def readTweets():
     data = readDatabase(databaseID, headers)
     tweets = []
-
+    if data is None:
+        return tweets
     for result in data['results']:
         props = result['properties']
         url_with_x = props['URL']['url']

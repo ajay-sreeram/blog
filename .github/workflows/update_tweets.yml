@@ -12,6 +12,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+    - name: Set up environment
+      run: echo "NOTION_SECRET=${{ secrets.NOTION_SECRET }}" >> $GITHUB_ENV
     - name: Fetch and Update Tweets
       run: python fetch_tweets.py
     - name: Commit and Push
