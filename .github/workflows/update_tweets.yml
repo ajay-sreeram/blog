@@ -20,6 +20,10 @@ jobs:
         pip install requests                
     - name: Fetch and Update Tweets
       run: python fetch_tweets.py
+    - name: Setup Git Credentials
+      run: git config --global credential.helper 'store --file .git-credentials'
+      env:
+        GIT_CREDENTIALS: https://${{ secrets.GH_TOKEN }}@github.com
     - name: Commit and Push
       run: |
         git config --global user.name 'GitHub Action'
