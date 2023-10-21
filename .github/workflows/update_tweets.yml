@@ -26,4 +26,4 @@ jobs:
         git config --global user.email 'github.action@github.com'
         git add .
         git commit -m "Update Top 5 Liked Tweets"
-        git push
+        git push https://${{ secrets.GH_TOKEN }}@github.com/ajay-sreeram/blog.git
