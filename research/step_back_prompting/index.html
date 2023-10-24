@@ -20,7 +20,7 @@
     
     
       
-        <title>Navigating the Landscape of Modern NLP - Code & Conversations</title>
+        <title>The Evolution of Large Language Models: A Focus on Step-Back Prompting - Code & Conversations</title>
       
     
     
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#navigating-the-landscape-of-modern-nlp" class="md-skip">
+        <a href="#the-evolution-of-large-language-models-a-focus-on-step-back-prompting" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Navigating the Landscape of Modern NLP
+              The Evolution of Large Language Models: A Focus on Step-Back Prompting
             
           </span>
         </div>
@@ -407,50 +407,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#vanilla-transformers" class="md-nav__link">
-    Vanilla Transformers
+  <a href="#an-innovative-approach-step-back-prompting" class="md-nav__link">
+    An Innovative Approach: Step-Back Prompting
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-long-sequence-challenges" class="md-nav__link">
-    The Long Sequence Challenges
+  <a href="#whats-the-big-deal" class="md-nav__link">
+    What's the Big Deal?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#tackling-attention-on-long-sequences" class="md-nav__link">
-    Tackling Attention on Long Sequences:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#techniques-helping-in-memory-consumption" class="md-nav__link">
-    Techniques Helping in Memory Consumption
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lightweight-models-and-fine-tuning" class="md-nav__link">
-    Lightweight Models and Fine-Tuning
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#unlocking-full-capabilities-prompt-engineering" class="md-nav__link">
-    Unlocking Full Capabilities: Prompt Engineering
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#future-landscape" class="md-nav__link">
-    Future Landscape
+  <a href="#how-does-this-change-the-game" class="md-nav__link">
+    How Does This Change the Game?
   </a>
   
 </li>
@@ -468,94 +440,66 @@
               <article class="md-content__inner md-typeset">
                 
                   
+  
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">Prompt Engineering</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">LLM</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">NLG</span>
+    
+  
+</nav>
 
 
-<h1 id="navigating-the-landscape-of-modern-nlp">Navigating the Landscape of Modern NLP</h1>
-<p><img alt="Transformer" src="../images/landscape_nlp_1/title2.png" style="height:200px; width:200px; display: block;margin-left: auto;margin-right: auto;" /></p>
-<p>The landscape of Natural Language Processing (NLP) has been deeply transformed by the rise of Transformer models. Their unparalleled effectiveness on a wide range of tasks has led to rapid advancements in the field. However, with great power comes great responsibility, or in this case, complexity and limitations. As an experienced NLP scientist, let's delve deep into the nuances of Transformers and their recent advancements, explaining how they influence not just text generation platforms like ChatGPT but also industry-wide applications.</p>
-<h2 id="vanilla-transformers">Vanilla Transformers</h2>
-<p>The Transformer architecture has been the cornerstone of modern Natural Language Processing (NLP). It comprises several building blocks that make it uniquely suited for a variety of tasks and lets focus on few:</p>
-<ul>
-<li>
-<p><strong>Positional Embeddings</strong>: These provide a way to add the sequence order information since the transformer itself doesn't understand the order of words.</p>
-</li>
-<li>
-<p><strong>Attention Mechanism</strong>: This is the magic sauce. It enables the model to focus on different parts of the input text when producing an output, which is crucial for understanding the context.</p>
-</li>
-<li>
-<p><strong>Activation and Normalization</strong>: Activation functions introduce non-linearity into the system, and normalization helps in faster and more stable training.</p>
-</li>
-</ul>
-<p>Each of these blocks plays a pivotal role in making Transformers what they are: incredibly effective but computationally demanding.</p>
-<hr />
-<h2 id="the-long-sequence-challenges">The Long Sequence Challenges</h2>
-<p>However, these building blocks are not without their drawbacks. The positional embeddings have limitations when it comes to very long sequences because of their fixed-size nature, and the attention mechanism is computationally intensive, having quadratic complexity. These challenges have been quite restrictive, especially when working with long texts or requiring fast real-time responses.</p>
-<hr />
-<h2 id="tackling-attention-on-long-sequences">Tackling Attention on Long Sequences:</h2>
-<p>These methods primarily focus on enabling the transformer architecture to manage long sequences without overwhelming computational and memory resources.</p>
-<ul>
-<li>
-<p><strong>Rotary positional embeddings (RoPE)</strong>: The key idea behind RoPE is to use a rotation matrix to encode absolute positions while also incorporating explicit relative position dependencies in the self-attention mechanism.</p>
-</li>
-<li>
-<p><strong>Alibi positional embeddings</strong>: ALiBi proposes a much simpler relative position encoding scheme. The relative distance that input tokens have to each other is added as a negative integer scaled by a pre-defined value m to each query-key entry.</p>
-</li>
-<li>
-<p><strong>Dilated Attention</strong>: This method spaces out the attention heads, allowing the model to capture long-range dependencies without having to attend to every single token. This reduces computational overhead and allows the model to work with longer sequences.</p>
-</li>
-<li>
-<p><strong>Sliding Window Attention</strong>: In this technique, each token in the sequence pays attention only to a subset of nearby tokens rather than all tokens. This localized approach makes it feasible to work with longer sequences.</p>
-</li>
-<li>
-<p><strong>Attention Sinks</strong>: Preserve a few initial tokens' KV alongside the sliding window's KV in the attention computation. These initial tokens serve as attention sinks (tokens that receive these unnecessary attention values), stabilizing the attention distribution and maintaining the model's performance even when the cache size is exceeded.</p>
-</li>
-</ul>
-<p>While advancements have addressed sequence length, Large Language Models (LLMs) still pose significant challenges during inference.</p>
-<hr />
-<h2 id="techniques-helping-in-memory-consumption">Techniques Helping in Memory Consumption</h2>
-<p>These methods are designed to optimize the computational efficiency of transformers, significantly reducing the memory footprint while maintaining model performance.</p>
-<ul>
-<li>
-<p><strong>Flash Attention</strong>: This approach breaks down the computation into smaller chunks. It provides outputs identical to the default self-attention layer but with memory costs that increase only linearly.</p>
-</li>
-<li>
-<p><strong>Key-Value Caching</strong>: This technique involves storing the key-value pairs from previous attention computations. When attending to similar sequences, the model can simply reuse these stored pairs, significantly reducing the computational load.
-Multi-Query and Grouped Query Attention: In Multi-Query Attention, all attention heads share a single set of key-value projection weights, optimizing memory consumption. Grouped Query Attention mitigates the quality drop associated with this by employing a limited set of distinct key-value weights for different groups of heads, thus achieving a compromise between performance and efficiency.</p>
-</li>
-<li>
-<p><strong>Assisted Generation</strong>: The concept involves using a smaller 'assistant' model to rapidly generate candidate tokens. The main model then confirms these tokens.</p>
-</li>
-<li>
-<p><strong>Quantization</strong>: Reduce the number of bits required to represent weights and activations of neural networks. Operating at reduced numerical precision, namely 8-bit and 4-bit, can achieve computational advantages without a considerable decline in model performance.</p>
-</li>
-</ul>
-<hr />
-<h2 id="lightweight-models-and-fine-tuning">Lightweight Models and Fine-Tuning</h2>
-<p>The solution lies in creating lightweight models and fine-tuning them for specific tasks. Fine-tuning helps to adapt a large pre-trained model to more specific tasks efficiently. Techniques like LoRA, Adapters, and Prefix Tuning have shown promise in this area.</p>
-<ul>
-<li><strong>LoRA</strong>: Fine-tunes attention patterns for specific tasks.</li>
-<li><strong>Adapters</strong>: Small neural modules added for task-specific fine-tuning.</li>
-<li><strong>Prefix Tuning</strong>: Adds a trainable prefix to adapt the pre-trained model for specific tasks.</li>
-</ul>
-<hr />
-<h2 id="unlocking-full-capabilities-prompt-engineering">Unlocking Full Capabilities: Prompt Engineering</h2>
-<p>Now that we have well-performing, fine-tuned, and compressed models, how do we extract their full capabilities? The answer lies in Prompt Engineering.</p>
-<p>Prompt engineering is the practice of designing inputs for generative AI tools that will produce optimal outputs. Some of the recent advances in this area are:</p>
-<ul>
-<li>
-<p><strong>Tree of thoughts</strong>: It guides language models in solving complex problems by structuring the reasoning process into a tree of intermediate thoughts or steps. These thoughts are systematically explored, evaluated, and ranked to find the most promising solutions.</p>
-</li>
-<li>
-<p><strong>Prompt Breeder</strong>: It works by creating a sample population of prompts and iteratively improving the prompts by performing mutation and allowing the best prompts to survive.</p>
-</li>
-<li>
-<p><strong>AutoGen</strong>: We can have multiple AI agents working together on a common task.</p>
-</li>
-</ul>
-<hr />
-<h2 id="future-landscape">Future Landscape</h2>
-<p>As we move forward, these advancements will continue to democratize access to LLMs, making them an integral part of our daily lives from personal assistants to advanced analytics tools. The horizon looks promising, and we are only scratching the surface.</p>
-<p>Thank you, and stay tuned for more!</p>
+
+<h1 id="the-evolution-of-large-language-models-a-focus-on-step-back-prompting">The Evolution of Large Language Models: A Focus on Step-Back Prompting</h1>
+<p><img alt="StepBack" src="../images/stepback_prompting/title1_1.png" style="height:250px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p>In the continually evolving landscape of Natural Language Processing (NLP), there is a rising trend of focusing on problem-solving through multi-step reasoning. Yet, state-of-the-art language models still struggle with the intricacies of complicated multi-step reasoning tasks. Could teaching these models to "step back" be the answer?</p>
+<h2 id="an-innovative-approach-step-back-prompting">An Innovative Approach: Step-Back Prompting</h2>
+<p><img alt="StepBack Prompting" src="../images/stepback_prompting/title2.png" style="height:250px; width:700px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p>Step-Back Prompting is an exciting technique that aims to guide language models to answer complex questions more accurately. Unlike other methods that try to enhance intermediate reasoning steps, this approach asks the model to take a step back to grasp high-level concepts first.</p>
+<p>To illustrate, consider a high-school physics question:</p>
+<blockquote>
+<p>What happens to the pressure, P, of an ideal gas if the temperature is increased by a factor of 2 and the volume is increased by a factor of 8? </p>
+</blockquote>
+<p>The model initially pauses and asks:</p>
+<blockquote>
+<p>What are the physics principles behind this question?</p>
+</blockquote>
+<p>And responds:</p>
+<blockquote>
+<p>Ideal gas law: PV = nRT, where P is the pressure, V is the volume, n is the number of moles, R is the gas constant, and T is the temperature.</p>
+</blockquote>
+<p>Only after grounding its reasoning in the Ideal Gas Law does it proceed to answer the original question:</p>
+<blockquote>
+<p>We can see that the pressure has decreased by a factor of 4.</p>
+</blockquote>
+<p>By focusing first on the high-level concept of Ideal Gas Law, the model avoids potential reasoning errors that could occur if it tackled the question head-on.</p>
+<h2 id="whats-the-big-deal">What's the Big Deal?</h2>
+<blockquote>
+<p>The first step is to teach LLMs to step back, and derive high-level abstractions such as concepts and first principles from the specific example. The second step is to leverage the reasoning ability to ground the solution on the high-level concepts and first principles.'</p>
+</blockquote>
+<p>These lines capture the essence of Step-Back Prompting. It's not just a two-step process; it's an exercise in abstraction and concrete reasoning. This technique has shown remarkable improvements on tasks that require domain-specific reasoning like Physics and Chemistry. Its efficacy has been demonstrated with performance improvements of up to 27% in various scenarios.</p>
+<blockquote>
+<p>We conduct a variety of analysis and find that STEP-BACK PROMPTING has strong performance improvements (up to 36%) over chain of thought (CoT) prompting and take a deep breathe (TDB) prompting.'</p>
+</blockquote>
+<p>The evidence is compelling; this method significantly outperforms other prompting techniques. It also corrects a large portion of the base model's errors, although some limitations in the model's reasoning capabilities still exist.</p>
+<h2 id="how-does-this-change-the-game">How Does This Change the Game?</h2>
+<p>This approach does not just improve the performance metrics; it also provides a new angle for approaching complex tasks. It serves as a template for the future, setting the stage for more sophisticated reasoning abilities in large language models.</p>
+<p>In summary, Step-Back Prompting seems to offer an effective avenue for improving the problem-solving capabilities of language models. By emphasizing the importance of grounding reasoning in high-level concepts and principles, this technique could very well be a stepping stone to the next big breakthrough in NLP.</p>
 
 
 
