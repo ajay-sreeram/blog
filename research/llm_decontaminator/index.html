@@ -463,7 +463,7 @@
 <p>A simple but effective solution to this problem is the LLM Decontaminator<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. This tool is designed to identify and remove these 'pre-learned' test samples from the training data, ensuring that our LLM, like a properly trained student, truly understands the material and can apply it to novel situations.</p>
 <h2 id="how-does-it-work">How Does It Work?</h2>
 <p><strong>1. Building the Dataset:</strong>
-The first step involves creating a dataset of test samples and their closest training samples using a simpler Sentence Transformer, like BERT.</p>
+The first step involves creating a dataset of test samples and their closest training samples using a simpler Sentence Transformer.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Code snippet for building dataset</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span> <span class="nf">build_database</span><span class="p">(</span><span class="n">train_cases</span><span class="p">,</span> <span class="n">test_cases</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;multi-qa-MiniLM-L6-cos-v1&#39;</span><span class="p">)</span>
