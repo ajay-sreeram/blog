@@ -460,7 +460,7 @@
 <p>Imagine preparing a student for an exam by inadvertently providing them with all the answers beforehand. It sounds like a guaranteed success, right? However, when the real test comes, this student is unprepared to tackle questions they've never seen. This scenario mirrors a significant issue in the world of Language Learning Models (LLMs) known as 'contamination.' </p>
 <p>Contamination occurs when a language model, like a diligent student, is exposed to the test questions (or something very similar) during its training phase. The result? An inflated sense of the model's ability to generalize and solve new problems.</p>
 <h2 id="objective-and-solution-the-llm-decontaminator">Objective and Solution: The LLM Decontaminator</h2>
-<p>An innovative solution to this problem is the LLM Decontaminator<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. This tool is designed to identify and remove these 'pre-learned' test samples from the training data, ensuring that our LLM, like a properly trained student, truly understands the material and can apply it to novel situations.</p>
+<p>A simple but effective solution to this problem is the LLM Decontaminator<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. This tool is designed to identify and remove these 'pre-learned' test samples from the training data, ensuring that our LLM, like a properly trained student, truly understands the material and can apply it to novel situations.</p>
 <h2 id="how-does-it-work">How Does It Work?</h2>
 <p><strong>1. Building the Dataset:</strong>
 The first step involves creating a dataset of test samples and their closest training samples using a simpler Sentence Transformer, like BERT.</p>
@@ -517,7 +517,7 @@ Next, we use GPT-4 to determine if a test sample and a training sample are essen
 <p>In conclusion, the LLM Decontaminator represents a significant step forward in the training of language models. By ensuring that our models are learning in a contamination-free environment, we're paving the way for more reliable, effective, and genuinely intelligent language processing tools. </p>
 <p>This development marks not just a technical achievement, but a commitment to the integrity and advancement of AI language understanding. It's a promise that our models will be as ready for the unpredictable nature of real-world language as a well-prepared student is for the twists and turns of a challenging exam.</p>
 <hr />
-<p><em>Special thanks to the original authors of the LLM Decontaminator paper and tool. Their groundbreaking work and generosity in open-sourcing this tool on GitHub are invaluable contributions to the AI community. For further details, I highly recommend visiting their paper and the GitHub repository linked in the references.</em></p>
+<p><em>Special thanks to the original authors of the LLM Decontaminator paper and tool. For further details, I highly recommend visiting their paper and the GitHub repository linked in the references.</em></p>
 <div class="footnote">
 <hr />
 <ol>
