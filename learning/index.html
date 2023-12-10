@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../coding/">
+      
+      
+        <link rel="next" href="../tech-updates/">
       
       
       <link rel="icon" href="../my_icon_nobg.png">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Index - Code & Conversations</title>
+        <title>Notes - Code & Conversations</title>
       
     
     
@@ -72,6 +76,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#model-merging-a-look-into-dare" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -101,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Notes
             
           </span>
         </div>
@@ -172,6 +181,25 @@
     
   
   Coding
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Notes
 
       </a>
     </li>
@@ -322,6 +350,68 @@
       
   
   
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Notes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Notes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model-merging-a-look-into-dare" class="md-nav__link">
+    Model Merging: A Look into DARE
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
   
     <li class="md-nav__item">
       <a href="../tech-updates/" class="md-nav__link">
@@ -393,6 +483,21 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#model-merging-a-look-into-dare" class="md-nav__link">
+    Model Merging: A Look into DARE
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -406,12 +511,20 @@
                   
 
 
-  <h1>Index</h1>
+  <h1>Notes</h1>
 
-<div class="admonition info inline">
-<p class="admonition-title">Thinking...</p>
-<p>Interesting things are on their way</p>
-</div>
+<h3 id="model-merging-a-look-into-dare">Model Merging: A Look into DARE</h3>
+<p><strong>DARE</strong>: Introduced a simple yet impactful concept for effortlessly creating a hybrid model, by combining weights of two models from same base model finetuned on two different tasks/data. (One on Math, One on Code)</p>
+<p>In DARE first identify what so called <em>delta parameters</em> by taking difference between actual weights and finetuned weights, then pick those with small difference value may be 0.005.</p>
+<p>In Four Steps:</p>
+<ul>
+<li>Randomly pick may be 90% of those Delta parameters</li>
+<li>Drop them by resetting actual weights to zero</li>
+<li>Rescale remaining ones with <code>1/(1-p)</code> (where p is drop rate).</li>
+<li>Finally do merging with this updated weights of two or more finetuned models using any of exisiting model merging techniques.</li>
+</ul>
+<p><img alt="DARE" src="images/dare.png" style="height:350px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p>More about it in the paper <a href="https://arxiv.org/abs/2311.03099"><strong>Language Models are Super Mario</strong></a></p>
 
   <hr>
 <div class="md-source-file">

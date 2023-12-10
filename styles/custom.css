@@ -15,3 +15,7 @@ a {
 a:hover{
     color: darkgray !important;
 }
+
+.md-copyright a{
+    color: #ffffff73 !important;
+}
