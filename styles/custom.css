@@ -19,3 +19,13 @@ a:hover{
 .md-copyright a{
     color: #ffffff73 !important;
 }
+
+.wordle_words{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    font-size: large !important;
+    width: 20% !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}

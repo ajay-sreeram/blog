@@ -456,6 +456,40 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#approach-1-training-with-complete-word-predictions" class="md-nav__link">
+    Approach 1: Training with Complete Word Predictions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approach-2-training-to-predict-character-by-character" class="md-nav__link">
+    Approach 2: Training to predict character by character
+  </a>
+  
+    <nav class="md-nav" aria-label="Approach 2: Training to predict character by character">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delving-deeper-understanding-the-transformers-internals" class="md-nav__link">
+    Delving Deeper: Understanding the Transformer's Internals
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-a-journey-through-ai-with-wordle-as-our-guide" class="md-nav__link">
+    Conclusion: A Journey Through AI with Wordle as Our Guide
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -475,7 +509,7 @@
 <p>Hey there! Ever wondered how tools like ChatGPT seem to understand and respond to us so well? It's like magic, right? Well, behind this magic lies a nifty trick called 'transformers' – no, not the robots, but something equally cool. These transformers are the brains behind popular language models, sifting through tons of text to learn how to chat with us. But let's be honest, diving into how they work can get pretty heavy.</p>
 <p>So, I had this fun idea: why not use the Wordle game to peel back the layers of these language models? If you've played Wordle, you know it's all about making smart guesses based on clues. And guess what? That's kind of like how these AI brains learn from the endless stream of data. Intrigued? Let's take this quirky journey together and uncover the secrets of AI, one Wordle guess at a time!</p>
 <h2 id="explaining-wordle-the-game-of-words-and-wits">Explaining Wordle: The Game of Words and Wits</h2>
-<p><img alt="Wordle" src="../images/wordle/title1.png" style="height:300px; width:250px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><img alt="Wordle" src="../images/wordle/title1.png" style="height:300px; width:250px; display: block; margin-left: auto;margin-right: auto;" /></p>
 <p>Imagine a game that's like a mini-puzzle for your brain, where words are the pieces. That's Wordle for you! In this simple yet captivating game, you have six chances to guess a five-letter word. Each guess gives you clues: letters that are right and in the correct spot turn green, letters that are in the word but in the wrong spot turn yellow, and letters not in the word stay unhighlighted. It's a daily brain teaser that's won hearts globally, not just because it's fun, but because it challenges you to think differently with each guess. Each round is a new adventure in word-guessing, where you learn from your previous guesses and inch closer to the solution. Simple, yet intriguing, right?</p>
 <h2 id="unpacking-my-wordle-solver-a-mini-ai-at-play">Unpacking My Wordle Solver: A Mini AI at Play</h2>
 <p>Now, let me introduce you to my little creation: a Wordle solver that's as clever as it is simple. The journey of this solver mirrors the way a language model sifts through information. Here's how it works:</p>
@@ -487,7 +521,210 @@
 <li><strong>Narrowing Down:</strong> From this scored list, the top contenders are picked for the next guess. It's a process of constant learning and adapting, much like how AI models train and improve.</li>
 <li><strong>Repeat and Refine:</strong> The cycle continues until the right word is found or the attempts run out.</li>
 </ol>
-<p>...</p>
+<p>While we now have a handy tool to tackle Wordle puzzles, there's a bigger picture to consider. Imagine using this tool to play numerous Wordle games, creating a treasure trove of data. This data becomes the training ground for our transformer models.However, it's crucial to remember that our goal here is not about achieving a 100% success rate in Wordle; it's about uncovering the principles that enable these AI models to learn and adapt, mirroring the complexities of human language understanding.</p>
+<h2 id="approach-1-training-with-complete-word-predictions">Approach 1: Training with Complete Word Predictions</h2>
+<p>In our first approach, the aim was to teach the model how to play Wordle, much like we humans do. So, loop playing 1000 Wordle games, using a random 5-letter word from the English corpus as the target word each time. This created a unique dataset, with a series of guess matrices as inputs and the subsequent guesses with their feedback as the expected outputs.</p>
+<p>For instance, if the target word was guessed correctly on the 4th try, this resulted in 3 input-output (I/O) pairs for our dataset. Each input had a shape of 5x145 (each of 145 representing 5 letters of each guess ie., 5x29, where 29 accounts for 26 English characters plus 3 colors for feedback). In cases where there were fewer than 5 guesses, the remaining rows in the input matrix were filled with zeros.</p>
+<p>After training the model with this dataset, below are the guesses to reach the target word <strong>TORIC</strong>:</p>
+<p class="wordle_words">
+  <span style="color: grey;">f</span>
+  <span style="color: yellow;">i</span>
+  <span style="color: grey;">e</span>
+  <span style="color: grey;">n</span>
+  <span style="color: yellow;">t</span>
+</p>
+<p class="wordle_words">
+  <span style="color: yellow;">r</span>
+  <span style="color: grey;">a</span>
+  <span style="color: grey;">a</span>
+  <span style="color: grey;">a</span>
+  <span style="color: yellow;">i</span>
+</p>
+<p class="wordle_words">
+  <span style="color: green;">t</span>
+  <span style="color: yellow;">r</span>
+  <span style="color: yellow;">i</span>
+  <span style="color: grey;">t</span>
+  <span style="color: grey;">r</span>
+</p>
+<p class="wordle_words">
+  <span style="color: green;">t</span>
+  <span style="color: green;">o</span>
+  <span style="color: green;">r</span>
+  <span style="color: green;">i</span>
+  <span style="color: grey;">r</span>
+</p>
+<p class="wordle_words">
+  <span style="color: green;"><b>t</b></span>
+  <span style="color: green;"><b>o</b></span>
+  <span style="color: green;"><b>r</b></span>
+  <span style="color: green;"><b>i</b></span>
+  <span style="color: green;"><b>c</b></span>
+</p>
+
+<p>From the predictions made in the above example, it becomes evident how the model is not just guessing but actually learning and evolving. Each round of feedback it receives is like a clue, guiding it closer to the target word. This iterative learning process demonstrates that the model has grasped the fundamental rules of Wordle – making intelligent guesses based on previous feedback and refining its strategy with each step. To really understand the sophistication of the model's outputs, we can delve into the data distribution patterns that emerge from various inputs. This analysis reveals the intricate ways in which the model adapts and predicts, highlighting its ability to mimic complex decision-making processes.</p>
+<p>Now the real test began. Play another 1000 Wordle games, but this time, let the model make the guesses. The fascinating part? When we plotted a stacked bar chart showing the distribution of each character's presence in each of the 5 positions, the charts from the original dataset and the model's predictions were strikingly similar. This was a clear indication of how well the transformer-based language model had learned and replicated the data distribution patterns found in the original Wordle dataset.</p>
+<p><img alt="Wordle" src="../images/wordle/stacked_occurance.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<details>
+  <summary>Here's the python code for the model</summary>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">WordleTransformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nhead</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">WordleTransformer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">transformer_encoder_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoderLayer</span><span class="p">(</span><span class="n">d_model</span><span class="o">=</span><span class="mi">29</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                                                    <span class="n">nhead</span><span class="o">=</span><span class="n">nhead</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                                                                    <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">transformer_encoder</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">TransformerEncoder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transformer_encoder_layer</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="c1"># Flatten the output of the transformer and then project it to the required size</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">29</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">29</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="c1"># Reshape x to fit the transformer encoder&#39;s input shape</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">29</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Reshape to [batch_size, 5, 29*5]</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformer_encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Flatten the transformer&#39;s output</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">29</span><span class="p">)</span>  <span class="c1"># Reshape to (batch_size, 5 letters, 26 alphabet and 3 labels)</span>
+</span></code></pre></div>
+</details>
+
+<p>However, To see the whole process in action, check out the detailed Jupyter notebook, which I'll link here for those interested in diving deeper into the data and analysis. <a href="https://gist.github.com/ajay-sreeram/4bc55bb064139cb5c244f491b0085d04">Wordle Experiment 1</a></p>
+<hr />
+<p>In our first approach, we treated each complete word as a single token, sending five such tokens as input to the transformer model. The task for the model was to map these to a set of 5 characters, each coupled with feedback, to predict the next guess. This method, while effective for our purpose, differs from how large language models are usually trained.</p>
+<p>Typically, these models learn to predict the next token based on the preceding ones, where a token can be an entire word or part of a word. In natural language, each word is connected to its predecessors in some way, creating a complex web of relations and meanings. <strong>By lining up the Wordle matrix and treating each character as a separate token, we see a simplified yet striking resemblance to natural language processing. Here, like in everyday speech, each character in the guess depends on the previous characters and their associated feedback. The rules are simpler and more defined, but the fundamental concept of sequential dependence remains.</strong></p>
+<p>With this understanding, let's move to the next approach. Here, we'll train our model to predict each character of the next guess individually, mirroring more closely how large language models process and generate text.</p>
+<h2 id="approach-2-training-to-predict-character-by-character">Approach 2: Training to predict character by character</h2>
+<p>In this approach, we take a slightly different path. Just like before, we begin by generating a dataset. This involves playing another 1000 Wordle games with various target words using our mini AI tool. However, this time, we only consider the final guess matrix from each game for our dataset.</p>
+<p>Our input-output pairs are quite intriguing in this setup:</p>
+<ul>
+<li>The input starts with the first guess and its feedback, and the expected output is the first character of the next guess.</li>
+<li>We continue adding characters from the next guess to the input, one by one, with each subsequent character becoming the new expected output.</li>
+</ul>
+<details>
+  <summary>Here's a python code block that illustrates how we create this training data:</summary>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span> <span class="nc">WordleDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">io_pairs</span><span class="p">,</span> <span class="n">token_to_id</span><span class="p">):</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">input_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">target_seqs</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">for</span> <span class="n">input_sequence</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">io_pairs</span><span class="p">:</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="c1"># Convert the sequence into token IDs, including the special tokens</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="n">tokenized_sequence</span> <span class="o">=</span> <span class="p">[</span><span class="n">token_to_id</span><span class="p">[</span><span class="s1">&#39;&lt;start&gt;&#39;</span><span class="p">]]</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="k">for</span> <span class="n">guess</span><span class="p">,</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">input_sequence</span><span class="p">:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>                <span class="n">tokenized_sequence</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">token_to_id</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">guess</span><span class="p">])</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>                <span class="n">tokenized_sequence</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">token_to_id</span><span class="p">[</span><span class="n">fb</span><span class="p">]</span> <span class="k">for</span> <span class="n">fb</span> <span class="ow">in</span> <span class="n">feedback</span><span class="p">])</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>                <span class="n">tokenized_sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_to_id</span><span class="p">[</span><span class="s1">&#39;&lt;word_sep&gt;&#39;</span><span class="p">])</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="n">tokenized_sequence</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_to_id</span><span class="p">[</span><span class="s1">&#39;&lt;end&gt;&#39;</span><span class="p">])</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="c1"># Shift the tokenized sequence to create the target sequence</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            <span class="n">shifted_sequence</span> <span class="o">=</span> <span class="n">tokenized_sequence</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">token_to_id</span><span class="p">[</span><span class="s1">&#39;&lt;pad&gt;&#39;</span><span class="p">]]</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="c1"># Ensure the input and target sequences are of equal length</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">input_seqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokenized_sequence</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">target_seqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shifted_sequence</span><span class="p">)</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_seqs</span><span class="p">)</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="n">input_seq</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_seqs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">target_seq</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_seqs</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="k">return</span> <span class="n">input_seq</span><span class="p">,</span> <span class="n">target_seq</span>
+</span></code></pre></div>
+</details>
+
+<p>Let's look at an example:</p>
+<div class="language-text highlight"><pre><span></span><code>Input: &lt;start&gt;, q, u, e, l, l, gray, green, gray, yellow, gray, &lt;word_sep&gt;, g
+Output: u
+</code></pre></div>
+<p>In this method, we feed the model a sequence of 12 tokens – a mix of alphabets, colors, and special words – and ask it to predict the next character, color, or special word. Through this, the model learns to make guesses character by character, considering past guesses and their feedbacks.</p>
+<details>
+  <summary>Here's the python code for the model</summary>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">generate_square_subsequent_mask</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">),</span> <span class="n">diagonal</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">return</span> <span class="n">mask</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">class</span> <span class="nc">WordleTransformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">num_encoder_layers</span><span class="p">,</span> <span class="n">max_seq_length</span><span class="p">):</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">WordleTransformer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">positional_embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">max_seq_length</span><span class="p">,</span> <span class="n">embed_dim</span><span class="p">)</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span><span class="n">CustomAttention</span><span class="p">(</span><span class="n">embed_dim</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_encoder_layers</span><span class="p">)])</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">final_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embed_dim</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>        
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="n">src</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="n">seq_length</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="n">positions</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">seq_length</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">src</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="n">src</span> <span class="o">=</span> <span class="n">src</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">positional_embedding</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="n">attention_weights</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="n">mask</span> <span class="o">=</span> <span class="n">generate_square_subsequent_mask</span><span class="p">(</span><span class="n">seq_length</span><span class="p">)</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>            <span class="n">src</span><span class="p">,</span> <span class="n">layer_attention</span><span class="p">,</span> <span class="n">context_emb</span>  <span class="o">=</span> <span class="n">layer</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>            <span class="n">attention_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layer_attention</span><span class="p">)</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final_linear</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">attention_weights</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1"># Meta Params</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="n">vocab_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">token_to_id</span><span class="p">)</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="n">embed_dim</span> <span class="o">=</span> <span class="mi">256</span> 
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="n">num_heads</span> <span class="o">=</span> <span class="mi">32</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="n">num_encoder_layers</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="n">max_seq_length</span> <span class="o">=</span> <span class="mi">60</span>
+</span></code></pre></div>
+</details>
+
+<p>A sample result post-training is quite revealing:</p>
+<div class="language-text highlight"><pre><span></span><code>Input sequence: &lt;start&gt;, p, o, u, n, d, green, yellow, grey, grey, green
+Predicted next 17 tokens: p, a, r, o, d, green, green, gray, green, green, &lt;word_sep&gt;, p, a, p, o, d, green
+</code></pre></div>
+<p>Notice how the model generates colors right after five characters and then a word separator, perfectly following our training pattern. This shows that it has learned the overall data pattern. More interestingly, the model's use of 'green' after 'd' in 'parod' signals to keep the same letter in the first position for the next guess – a strategy similar to how we humans approach Wordle puzzles.</p>
+<p>But that's not all. Let's look at more results:</p>
+<div class="language-text highlight"><pre><span></span><code>Input: round [green, yellow, grey, grey, green], Predicted: r, a, l, o, d
+Input: audio [green, yellow, grey, grey, green], Predicted: a, l, o, u, o
+Input: phone [green, yellow, grey, grey, green], Predicted: p, a, h, a, e
+Input: shift [green, yellow, grey, grey, green], Predicted: s, t, h, o, t
+</code></pre></div>
+<p>These examples highlight how the model maintains green-coded letters in the same positions and shifts yellow-coded letters to increase their chance of turning green in the next guess.</p>
+<p>So far, we've seen what the model predicts. Next, let's dive deeper into its internals. We'll explore what happens after each layer and how attention is applied to previous tokens, visualizing the layer outputs and attention matrices at each level. Stay tuned for an eye-opening journey into the heart of the transformer!</p>
+<h3 id="delving-deeper-understanding-the-transformers-internals">Delving Deeper: Understanding the Transformer's Internals</h3>
+<p>In our second approach, we observe an intriguing aspect of the transformer model – its ability to process and predict each character and color. Let's examine an example and explore what it's doing with the other tokens:</p>
+<p>For the input 'boxer' with the feedback ['green','gray','gray','gray','green'], the model's output across different tokens is as follows:</p>
+<div class="language-text highlight"><pre><span></span><code>s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b
+s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u
+s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g
+s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g, a
+s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g, a, r
+s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g, a, r, green
+</code></pre></div>
+<p>In the beginning, the outputs seem random because the model is working with limited context. However, after generating five letters, it starts producing colors – a learned behavior from our dataset. Notably, when 'green' aligns with a specific letter in the input (like 'b' in 'boxer'), the model learns to replicate that letter in the same position in its next guess.</p>
+<p>Now, let's dive into the model's layers to see how this transformation happens:</p>
+<p>Let's take a journey through each layer of our model and visualize how it processes the input sequence:</p>
+<p><strong>1. Embedding Layer &amp; Positional Embedding Layer:</strong></p>
+<p>Here, each character gets a unique embedding, and positional information is added. The same letters at different positions have slightly different shades, indicating their unique positions.</p>
+<p><img alt="Positional Embedding Heatmap" src="../images/wordle/pos_emb.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><strong>2. Transformer Layer 1:</strong></p>
+<p>This layer adds Wordle-specific context to each token, as seen in the varying embedding patterns for the same characters at different positions.</p>
+<p><img alt="Transformer Layer 1 Heatmap" src="../images/wordle/trans_1.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><strong>3. Transformer Layer 2:</strong></p>
+<p>A noticeable shift occurs here, with letters mapped to 'green' in previous tokens showing different patterns, highlighting the model's learning to predict the next token.</p>
+<p><img alt="Transformer Layer 2 Heatmap" src="../images/wordle/trans_2.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><strong>4. Transformer Layer 3:</strong></p>
+<p>Here, the difference between letters and colors becomes even more pronounced, preparing the input tokens for the final prediction. The model sharpens its focus on crucial details. Here, as it anticipates predicting 'green' for the letter 'b', we see a distinct blue shade highlighting 'b' in the heatmap. This indicates the model's recognition of 'b's correct position, influenced by the green feedback for next guess.</p>
+<p><img alt="Transformer Layer 3 Heatmap" src="../images/wordle/trans_3.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><strong>5. Linear (Output) Layer:</strong></p>
+<p>This layer shows high confidence in predicting certain tokens, like 'green' after 'b', and 'word_sep' after 'green', indicating the model's learned patterns.</p>
+<p><img alt="Output Layer Heatmap" src="../images/wordle/out_voc.png" style="height:450px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p>Finally, let's look at the 32 attention heads. Each head attends to different parts of the input in unique ways, demonstrating the complexity and adaptability of the transformer model.</p>
+<p><img alt="Head Heatmaps" src="../images/wordle/head_heatmaps.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p>For those of you eager to explore these concepts in even more depth, I invite you to check out the <a href="https://gist.github.com/ajay-sreeram/892fd563abc63b9f7d0555f6891c3f96">detailed Jupyter notebook</a>. It's packed with additional insights and visualizations that bring these ideas to life. Dive in and satisfy your curiosity!</p>
+<h2 id="conclusion-a-journey-through-ai-with-wordle-as-our-guide">Conclusion: A Journey Through AI with Wordle as Our Guide</h2>
+<p>As we come to the end of this enlightening journey, it's clear that the world of AI and transformers is less daunting when viewed through the familiar lens of the Wordle game. We've seen how a simple yet strategic word game can mirror the complex processes of language models. Our exploration from the basic rules of Wordle to the sophisticated layers of a transformer model has shown us the adaptable and learning nature of AI. By breaking down each step, from predicting complete words to individual characters, we've uncovered how these models process information, learn from feedback, and make intelligent predictions.</p>
+<p>This journey is more than just understanding AI; it's about appreciating the beauty of machine learning and its ability to mirror human-like decision-making in a structured, logical manner. So, next time you play Wordle or interact with a language model, remember the intricate dance of algorithms and data behind the scenes, making each guess and response possible. And as technology continues to evolve, so will our understanding and capabilities, opening up new frontiers for innovation and discovery in the realm of AI.</p>
 
   <hr>
 <div class="md-source-file">
