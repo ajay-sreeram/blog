@@ -59,7 +59,18 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -550,13 +561,13 @@
 <p>In the unoptimized method, the language model processes one sequence at a time, adding a single token (word or punctuation) in each step. For example, given the input "Mark is quick. He moves", the model adds one word at a time until the sequence ends. This method is slow, especially for longer texts.</p>
 <p>The batched generation method improves efficiency by processing multiple sequences simultaneously. Sequences are padded with filler tokens to make them equal in length, and these tokens are masked so they don't influence the generation. For instance, the model can simultaneously process multiple sentences in one pass, adding a word to each sequence.</p>
 <p>Continuous batching further optimizes this process. When a sequence completes, new sequences are inserted into the batch to replace the completed ones. This approach prevents wasting computational resources on generating unnecessary tokens after a sequence ends. It's more efficient because it leverages the model's capacity to handle multiple sequences in parallel, thus reducing overall processing time and resource usage.</p>
-<p><img alt="COB" src="images/cob.png" style="height:250px; width:600px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="images/cob.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="COB" src="images/cob.png" style="height:250px; width:600px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>More about it in the blog: <a href="https://www.anyscale.com/blog/continuous-batching-llm-inference"><strong>Continuous batching in LLM inference</strong></a></p>
 <hr />
 <h3 id="moes-mixture-of-experts">MoE's: Mixture of Experts</h3>
 <p>MoE models use sparse layers of specialized sub-networks (<strong>experts</strong>) and a gate network (<strong>router</strong>) that determines which tokens are sent to which expert. Each expert is specialized in different aspects of the data. In practice, the experts are FFNs, but they can also be more complex networks or even a MoE itself. </p>
 <p>Although a MoE might have many parameters, only some of them are used during inference. This leads to much faster inference compared to a dense model with the same number of parameters. </p>
-<p><img alt="MoE" src="images/moe.png" style="height:300px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="images/moe.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="MoE" src="images/moe.png" style="height:300px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>More about it in the blog: <a href="https://huggingface.co/blog/moe"><strong>Mixture of Experts Explained</strong></a></p>
 <hr />
 <h3 id="model-merging-a-look-into-dare">Model Merging: A Look into DARE</h3>
@@ -569,7 +580,7 @@
 <li>Rescale remaining ones with <code>1/(1-p)</code> (where p is drop rate).</li>
 <li>Finally do merging with this updated weights of two or more finetuned models using any of exisiting model merging techniques.</li>
 </ul>
-<p><img alt="DARE" src="images/dare.png" style="height:350px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="images/dare.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="DARE" src="images/dare.png" style="height:350px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>More about it in the paper: <a href="https://arxiv.org/abs/2311.03099"><strong>Language Models are Super Mario</strong></a></p>
 
   <hr>
@@ -630,5 +641,5 @@
         <script src="../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -450,7 +461,7 @@
 
 
 <h1 id="a-simple-understanding-of-transformer">A Simple understanding of Transformer</h1>
-<p><img alt="Transformer" src="../images/transformer/title1.png" style="height:200px; width:300px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/transformer/title1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Transformer" src="../images/transformer/title1.png" style="height:200px; width:300px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>The 𝗧𝗿𝗮𝗻𝘀𝗳𝗼𝗿𝗺𝗲𝗿 architecture is the fundamental building block that enables LLM's to understand and generate text. Let's break it down as if we're reading a magical storybook. Each component of a Transformer model is like a unique character in this captivating tale!</p>
 <p>𝗜𝗻𝗽𝘂𝘁 𝗮𝗻𝗱 𝗢𝘂𝘁𝗽𝘂𝘁: Imagine you have a magic storytelling book. You tell it a sentence (input), and it gives you a new sentence (output) that continues the story.</p>
 <p>𝗘𝗺𝗯𝗲𝗱𝗱𝗶𝗻𝗴 𝗟𝗮𝘆𝗲𝗿: First, each word in the sentence you tell the magic book gets turned into a special sticker. These stickers help the book understand what each word really means.</p>
@@ -519,5 +530,5 @@
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

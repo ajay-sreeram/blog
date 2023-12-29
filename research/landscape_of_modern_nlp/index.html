@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -507,7 +518,7 @@
 
 
 <h1 id="navigating-the-landscape-of-modern-nlp">Navigating the Landscape of Modern NLP</h1>
-<p><img alt="Transformer" src="../images/landscape_nlp_1/title2.png" style="height:200px; width:200px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/landscape_nlp_1/title2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Transformer" src="../images/landscape_nlp_1/title2.png" style="height:200px; width:200px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>The landscape of Natural Language Processing (NLP) has been deeply transformed by the rise of Transformer models. Their unparalleled effectiveness on a wide range of tasks has led to rapid advancements in the field. However, with great power comes great responsibility, or in this case, complexity and limitations. As an experienced NLP scientist, let's delve deep into the nuances of Transformers and their recent advancements, explaining how they influence not just text generation platforms like ChatGPT but also industry-wide applications.</p>
 <h2 id="vanilla-transformers">Vanilla Transformers</h2>
 <p>The Transformer architecture has been the cornerstone of modern Natural Language Processing (NLP). It comprises several building blocks that make it uniquely suited for a variety of tasks and lets focus on few:</p>
@@ -651,5 +662,5 @@ Multi-Query and Grouped Query Attention: In Multi-Query Attention, all attention
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -528,19 +539,19 @@
 <h2 id="innovations-in-urban-gardening">Innovations in Urban Gardening</h2>
 <h3 id="vertical-gardens-sky-high-greenery">Vertical Gardens: Sky-high Greenery</h3>
 <p>One of the most visually striking innovations in urban gardening is the vertical garden. These living walls bring a breath of fresh air to urban landscapes. By growing plants on vertical surfaces, they maximize limited space in city environments.</p>
-<p><img alt="title2" src="../images/urban_gardening/title_2.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/urban_gardening/title_2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="title2" src="../images/urban_gardening/title_2.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <h3 id="hydroponic-systems-soilless-success">Hydroponic Systems: Soilless Success</h3>
 <p>Hydroponic systems, which grow plants in a water-based, nutrient-rich solution, are a game-changer. They use less water than traditional soil gardening, and because they can be set up indoors, they allow year-round cultivation.</p>
-<p><img alt="title3" src="../images/urban_gardening/title_3.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/urban_gardening/title_3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="title3" src="../images/urban_gardening/title_3.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <h3 id="community-gardens-unity-in-green">Community Gardens: Unity in Green</h3>
 <p>Community gardens are sprouting up in cities worldwide, turning vacant lots into vibrant green spaces. These gardens do more than grow food; they foster community spirit, provide education, and create a sense of belonging.</p>
-<p><img alt="title4" src="../images/urban_gardening/title_4.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/urban_gardening/title_4.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="title4" src="../images/urban_gardening/title_4.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <h3 id="smart-gardening-tech-meets-terra">Smart Gardening: Tech Meets Terra</h3>
 <p>The integration of technology in urban gardening is fascinating. Smart gardening systems can automate watering and lighting, and apps can provide reminders and tips for plant care, making gardening more accessible to everyone.</p>
-<p><img alt="title5" src="../images/urban_gardening/title_5.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/urban_gardening/title_5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="title5" src="../images/urban_gardening/title_5.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <h3 id="rooftop-gardens-oasis-above">Rooftop Gardens: Oasis Above</h3>
 <p>Rooftop gardens are turning barren urban rooftops into lush, green oases. They not only provide a space for relaxation and agriculture but also help in insulation and reducing urban heat islands.</p>
-<p><img alt="title6" src="../images/urban_gardening/title_6.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/urban_gardening/title_6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="title6" src="../images/urban_gardening/title_6.png" style="height:400px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>The innovations in urban gardening are more than just a trend; they're a testament to human ingenuity and our enduring connection to nature. These green initiatives not only add aesthetic value to our urban landscapes but also contribute to ecological sustainability and social well-being. As we continue to cultivate these tiny patches of nature amidst the concrete, we're reminded that even in the busiest cities, there's always room to grow.</p>
 <p><em>In every concrete jungle, there's a hidden garden waiting to bloom.</em></p>
@@ -603,5 +614,5 @@
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -502,10 +513,10 @@
 
 
 <h1 id="the-evolution-of-large-language-models-a-focus-on-step-back-prompting">The Evolution of Large Language Models: A Focus on Step-Back Prompting</h1>
-<p><img alt="StepBack" src="../images/stepback_prompting/title1_1.png" style="height:250px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/stepback_prompting/title1_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="StepBack" src="../images/stepback_prompting/title1_1.png" style="height:250px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>In the continually evolving landscape of Natural Language Processing (NLP), there is a rising trend of focusing on problem-solving through multi-step reasoning. Yet, state-of-the-art language models still struggle with the intricacies of complicated multi-step reasoning tasks. Could teaching these models to "step back" be the answer?</p>
 <h2 id="an-innovative-approach-step-back-prompting">An Innovative Approach: Step-Back Prompting</h2>
-<p><img alt="StepBack Prompting" src="../images/stepback_prompting/title2.png" style="height:250px; width:700px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/stepback_prompting/title2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="StepBack Prompting" src="../images/stepback_prompting/title2.png" style="height:250px; width:700px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>Step-Back Prompting<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> is an exciting technique that aims to guide language models to answer complex questions more accurately. Unlike other methods that try to enhance intermediate reasoning steps, this approach asks the model to take a step back to grasp high-level concepts first.</p>
 <p>To illustrate, consider a high-school physics question:</p>
 <blockquote>
@@ -606,5 +617,5 @@
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -517,7 +528,7 @@
 <p>So, I had this fun idea: why not use the Wordle game to peel back the layers of these language models? If you've played Wordle, you know it's all about making smart guesses based on clues. And guess what? That's kind of like how these AI brains learn from the endless stream of data. Intrigued? Let's take this quirky journey together and uncover the secrets of AI, one Wordle guess at a time!</p>
 <p><ins><a href="https://gist.github.com/ajay-sreeram/892fd563abc63b9f7d0555f6891c3f96">Link for the Code/Notebook</a></ins></p>
 <h2 id="explaining-wordle-the-game-of-words-and-wits">Explaining Wordle: The Game of Words and Wits</h2>
-<p><img alt="Wordle" src="../images/wordle/title1.png" style="height:300px; width:250px; display: block; margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/title1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Wordle" src="../images/wordle/title1.png" style="height:300px; width:250px; display: block; margin-left: auto;margin-right: auto;" /></a></p>
 <p>Imagine a game that's like a mini-puzzle for your brain, where words are the pieces. That's Wordle for you! In this simple yet captivating game, you have six chances to guess a five-letter word. Each guess gives you clues: letters that are right and in the correct spot turn green, letters that are in the word but in the wrong spot turn yellow, and letters not in the word stay unhighlighted. It's a daily brain teaser that's won hearts globally, not just because it's fun, but because it challenges you to think differently with each guess. Each round is a new adventure in word-guessing, where you learn from your previous guesses and inch closer to the solution. Simple, yet intriguing, right?</p>
 <h2 id="unpacking-my-wordle-solver-a-mini-ai-at-play">Unpacking My Wordle Solver: A Mini AI at Play</h2>
 <p>Now, let me introduce you to my little creation: a Wordle solver that's as clever as it is simple. The journey of this solver mirrors the way a language model sifts through information. Here's how it works:</p>
@@ -615,7 +626,7 @@
 
 <p>From the predictions made in the above example, it becomes evident how the model is not just guessing but actually learning and evolving. Each round of feedback it receives is like a clue, guiding it closer to the target word. This iterative learning process demonstrates that the model has grasped the fundamental rules of Wordle – making intelligent guesses based on previous feedback and refining its strategy with each step. To really understand the sophistication of the model's outputs, we can delve into the data distribution patterns that emerge from various inputs. This analysis reveals the intricate ways in which the model adapts and predicts, highlighting its ability to mimic complex decision-making processes.</p>
 <p>Now the real test began. Play another 1000 Wordle games, but this time, let the model make the guesses. The fascinating part? When we plotted a stacked bar chart showing the distribution of each character's presence in each of the 5 positions, the charts from the original dataset and the model's predictions were strikingly similar. This was a clear indication of how well the transformer-based language model had learned and replicated the data distribution patterns found in the original Wordle dataset.</p>
-<p><img alt="Wordle" src="../images/wordle/stacked_occurance.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/stacked_occurance.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Wordle" src="../images/wordle/stacked_occurance.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <details>
   <summary>Here's the python code for the model</summary>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span> <span class="nc">WordleTransformer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
@@ -757,21 +768,21 @@ s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g, a, r, gr
 <p>Let's take a journey through each layer of our model and visualize how it processes the input sequence:</p>
 <p><strong>1. Embedding Layer &amp; Positional Embedding Layer:</strong></p>
 <p>Here, each character gets a unique embedding, and positional information is added. The same letters at different positions have slightly different shades, indicating their unique positions.</p>
-<p><img alt="Positional Embedding Heatmap" src="../images/wordle/pos_emb.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/pos_emb.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Positional Embedding Heatmap" src="../images/wordle/pos_emb.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p><strong>2. Transformer Layer 1:</strong></p>
 <p>This layer adds Wordle-specific context to each token, as seen in the varying embedding patterns for the same characters at different positions.</p>
-<p><img alt="Transformer Layer 1 Heatmap" src="../images/wordle/trans_1.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/trans_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Transformer Layer 1 Heatmap" src="../images/wordle/trans_1.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p><strong>3. Transformer Layer 2:</strong></p>
 <p>A noticeable shift occurs here, with letters mapped to 'green' in previous tokens showing different patterns, highlighting the model's learning to predict the next token.</p>
-<p><img alt="Transformer Layer 2 Heatmap" src="../images/wordle/trans_2.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/trans_2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Transformer Layer 2 Heatmap" src="../images/wordle/trans_2.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p><strong>4. Transformer Layer 3:</strong></p>
 <p>Here, the difference between letters and colors becomes even more pronounced, preparing the input tokens for the final prediction. The model sharpens its focus on crucial details. Here, as it anticipates predicting 'green' for the letter 'b', we see a distinct blue shade highlighting 'b' in the heatmap. This indicates the model's recognition of 'b's correct position, influenced by the green feedback for next guess.</p>
-<p><img alt="Transformer Layer 3 Heatmap" src="../images/wordle/trans_3.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/trans_3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Transformer Layer 3 Heatmap" src="../images/wordle/trans_3.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p><strong>5. Linear (Output) Layer:</strong></p>
 <p>This layer shows high confidence in predicting certain tokens, like 'green' after 'b', and 'word_sep' after 'green', indicating the model's learned patterns.</p>
-<p><img alt="Output Layer Heatmap" src="../images/wordle/out_voc.png" style="height:450px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/out_voc.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Output Layer Heatmap" src="../images/wordle/out_voc.png" style="height:450px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>Finally, let's look at the 32 attention heads. Each head attends to different parts of the input in unique ways, demonstrating the complexity and adaptability of the transformer model.</p>
-<p><img alt="Head Heatmaps" src="../images/wordle/head_heatmaps.png" style="display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/wordle/head_heatmaps.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Head Heatmaps" src="../images/wordle/head_heatmaps.png" style="display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>For those of you eager to explore these concepts in even more depth, I invite you to check out the <ins><a href="https://gist.github.com/ajay-sreeram/892fd563abc63b9f7d0555f6891c3f96">detailed Jupyter notebook</a></ins>. It's packed with additional insights and visualizations that bring these ideas to life. Dive in and satisfy your curiosity!</p>
 <h2 id="future-work-expanding-horizons-in-ai-and-wordle">Future Work: Expanding Horizons in AI and Wordle</h2>
 <p>As we look ahead, the potential for further exploration and innovation in the realm of AI, particularly in relation to our Wordle-based language model, is vast and exciting. Here are some avenues for future work that promise to deepen our understanding and enhance the capabilities of these models:</p>
@@ -859,5 +870,5 @@ s, a, u, e, r, gray, gray, gray, gray, gray, &lt;word_sep&gt;, b, u, g, a, r, gr
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

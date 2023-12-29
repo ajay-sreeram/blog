@@ -59,7 +59,18 @@
     
     
     
-  </head>
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -468,32 +479,32 @@
 <h1 id="are-you-a-data-scientist">Are you a Data Scientist?</h1>
 <p>Here are some learnings to enhance your technical understandings</p>
 <hr />
-<p><img align="right" alt="Wordle" src="images/wordle/title1_1.png" style="height:130px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/wordle/title1_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="Wordle" src="images/wordle/title1_1.png" style="height:130px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="wordle">Playing with Words and AI</a></strong></p>
 <p>How Wordle Illuminates Language Model Mechanics? (Dec 2023)</p>
 <p><br/>
 <br/></p>
-<p><img align="right" alt="LLM Decontaminator" src="images/decontaminator/title_1.png" style="height:100px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/decontaminator/title_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="LLM Decontaminator" src="images/decontaminator/title_1.png" style="height:100px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="llm_decontaminator">LLM Decontaminator: Removing test overalap with train set</a></strong></p>
 <p>How to detect and eleminate data overlap from train set? (Nov 2023)</p>
 <p><br/>
 <br/></p>
-<p><img align="right" alt="Zephyr" src="images/zephyr/title1_1.png" style="height:100px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/zephyr/title1_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="Zephyr" src="images/zephyr/title1_1.png" style="height:100px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="zephyr">Zephyr: Smaller Language Models aligning to user Intent</a></strong></p>
 <p>How to make small language models as useful as large language models? (Nov 2023)</p>
 <p><br/>
 <br/></p>
-<p><img align="right" alt="Step Back Prompting" src="images/stepback_prompting/title1_1.png" style="height:100px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/stepback_prompting/title1_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="Step Back Prompting" src="images/stepback_prompting/title1_1.png" style="height:100px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="step_back_prompting">Step Back Prompting: How Abstraction Elevates LLM's Capabilities</a></strong></p>
 <p>How can we make smart language models even smarter by teaching them to think abstractly? (Oct 2023)</p>
 <p><br/>
 <br/></p>
-<p><img align="right" alt="Transformer" src="images/transformer/title2.png" style="height:100px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/transformer/title2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="Transformer" src="images/transformer/title2.png" style="height:100px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="transformer_review">Transformer: A Simple understanding of Transformer</a></strong></p>
 <p>Do you want to understand the components of transformer without any jargons?</p>
 <p><br/>
 <br/></p>
-<p><img align="right" alt="Navigating the Landscape of Modern NLP" src="images/landscape_nlp_1/title1.png" style="height:100px;width:150px;margin-top:-2%;" /></p>
+<p><a class="glightbox" href="images/landscape_nlp_1/title1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="right" alt="Navigating the Landscape of Modern NLP" src="images/landscape_nlp_1/title1.png" style="height:100px;width:150px;margin-top:-2%;" /></a></p>
 <p><strong><a href="landscape_of_modern_nlp">Navigating the Landscape of Modern NLP</a></strong></p>
 <p>Do you want to get an overview of recent progress in making LLM's better? (Sep 2023)</p>
 
@@ -555,5 +566,5 @@
         <script src="../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>

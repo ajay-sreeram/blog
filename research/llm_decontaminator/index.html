@@ -55,7 +55,18 @@
     
     
     
-  </head>
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+        html.glightbox-open { overflow: initial; height: 100%; }
+        .gslide-title { margin-top: 0px; user-select: text; }
+        .gslide-desc { color: #666; user-select: text; }
+        .gslide-image img { background: white; }
+        
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+            </style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -492,7 +503,7 @@
 
 
 <h1 id="unveiling-the-power-of-llm-decontaminator-in-language-models">Unveiling the Power of LLM Decontaminator in Language Models</h1>
-<p><img alt="Contamination" src="../images/decontaminator/title_1.png" style="height:250px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></p>
+<p><a class="glightbox" href="../images/decontaminator/title_1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Contamination" src="../images/decontaminator/title_1.png" style="height:250px; width:400px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
 <p>Imagine preparing a student for an exam by inadvertently providing them with all the answers beforehand. It sounds like a guaranteed success, right? However, when the real test comes, this student is unprepared to tackle questions they've never seen. This scenario mirrors a significant issue in the world of Language Learning Models (LLMs) known as 'contamination.' </p>
 <p>Contamination occurs when a language model, like a diligent student, is exposed to the test questions (or something very similar) during its training phase. The result? An inflated sense of the model's ability to generalize and solve new problems.</p>
 <h2 id="objective-and-solution-the-llm-decontaminator">Objective and Solution: The LLM Decontaminator</h2>
@@ -624,5 +635,5 @@ Next, we use GPT-4 to determine if a test sample and a training sample are essen
         <script src="../../scripts/embed_tweets.js"></script>
       
     
-  </body>
+  <script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
 </html>
