@@ -16,7 +16,7 @@
         <link rel="prev" href="../engineering/">
       
       
-        <link rel="next" href="../tech-updates/">
+        <link rel="next" href="../codes/">
       
       
       <link rel="icon" href="../my_icon_nobg.png">
@@ -86,11 +86,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#learning-notes" class="md-skip">
-          Skip to content
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -259,6 +254,23 @@
   
   
     <li class="md-tabs__item">
+      <a href="../codes/" class="md-tabs__link">
+        
+  
+    
+  
+  Code Snippets
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../tech-updates/" class="md-tabs__link">
         
   
@@ -406,19 +418,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Notes
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -430,53 +429,25 @@
 
       </a>
       
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
     
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
-        <li class="md-nav__item">
-  <a href="#self-extend-llm-context-window" class="md-nav__link">
-    Self-Extend LLM Context Window
-  </a>
-  
-</li>
       
-        <li class="md-nav__item">
-  <a href="#continuous-batching" class="md-nav__link">
-    Continuous Batching
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#moes-mixture-of-experts" class="md-nav__link">
-    MoE's: Mixture of Experts
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#model-merging-a-look-into-dare" class="md-nav__link">
-    Model Merging: A Look into DARE
-  </a>
   
-</li>
-      
-    </ul>
+    <li class="md-nav__item">
+      <a href="../codes/" class="md-nav__link">
+        
   
-</nav>
-      
+  <span class="md-ellipsis">
+    Code Snippets
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -555,44 +526,6 @@
   
   
   
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#self-extend-llm-context-window" class="md-nav__link">
-    Self-Extend LLM Context Window
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#continuous-batching" class="md-nav__link">
-    Continuous Batching
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#moes-mixture-of-experts" class="md-nav__link">
-    MoE's: Mixture of Experts
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#model-merging-a-look-into-dare" class="md-nav__link">
-    Model Merging: A Look into DARE
-  </a>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -607,46 +540,9 @@
                   
 
 
-<h1 id="learning-notes">Learning Notes</h1>
-<h3 id="self-extend-llm-context-window">Self-Extend LLM Context Window</h3>
-<p>The "Self-Extend" method is designed to tackle the positional out-of-distribution (OOD) issue in LLMs (with relative position encodings such as RoPE). This issue arises when LLMs encounter text sequences during inference that exceed the length of their pretraining context window. In such cases, LLMs are exposed to new relative distances not present during their pretraining phase, leading to unpredictable behaviors. (Thats because, with unseen relative positions, the attention distributions are very different compared to those within the pretraining context window length)</p>
-<p>The core idea of "Self-Extend" is to remap these unseen large relative positions to those encountered during pretraining. This is achieved using a simple floor division operation (//) as the mapping function. </p>
-<p>The "Self-Extend" method innovatively employs a dual attention mechanism to extend the context window of LLMs. This mechanism consists of two types of attention: grouped attention and normal attention.</p>
-<ol>
-<li>The grouped attention is designed to handle tokens that are at a long distance from each other. In this mechanism, the FLOOR operation is applied to the positions of these distant tokens.</li>
-<li>The normal attention mechanism remains unchanged from the pretraining stage and is used for tokens that are in close proximity, essentially neighbors. This aspect of the attention mechanism ensures that the model retains its original, finely-tuned ability to process and understand the immediate context around a given token.</li>
-</ol>
-<p><a class="glightbox" href="images/self_extended.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="self_extended" src="images/self_extended.png" style="height:200px; width:600px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
-<blockquote>
-<p>Note that Self-Extend only modifies the attention mechanism during inference and it does not require any fine-tuning or training.</p>
-</blockquote>
-<p>More about it in the paper: <a href="https://arxiv.org/abs/2401.01325"><strong>LLM Maybe LongLM</strong></a></p>
-<hr />
-<h3 id="continuous-batching">Continuous Batching</h3>
-<p>In the unoptimized method, the language model processes one sequence at a time, adding a single token (word or punctuation) in each step. For example, given the input "Mark is quick. He moves", the model adds one word at a time until the sequence ends. This method is slow, especially for longer texts.</p>
-<p>The batched generation method improves efficiency by processing multiple sequences simultaneously. Sequences are padded with filler tokens to make them equal in length, and these tokens are masked so they don't influence the generation. For instance, the model can simultaneously process multiple sentences in one pass, adding a word to each sequence.</p>
-<p>Continuous batching further optimizes this process. When a sequence completes, new sequences are inserted into the batch to replace the completed ones. This approach prevents wasting computational resources on generating unnecessary tokens after a sequence ends. It's more efficient because it leverages the model's capacity to handle multiple sequences in parallel, thus reducing overall processing time and resource usage.</p>
-<p><a class="glightbox" href="images/cob.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="COB" src="images/cob.png" style="height:200px; width:600px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
-<p>More about it in the blog: <a href="https://www.anyscale.com/blog/continuous-batching-llm-inference"><strong>Continuous batching in LLM inference</strong></a></p>
-<hr />
-<h3 id="moes-mixture-of-experts">MoE's: Mixture of Experts</h3>
-<p>MoE models use sparse layers of specialized sub-networks (<strong>experts</strong>) and a gate network (<strong>router</strong>) that determines which tokens are sent to which expert. Each expert is specialized in different aspects of the data. In practice, the experts are FFNs, but they can also be more complex networks or even a MoE itself. </p>
-<p>Although a MoE might have many parameters, only some of them are used during inference. This leads to much faster inference compared to a dense model with the same number of parameters. </p>
-<p><a class="glightbox" href="images/moe.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="MoE" src="images/moe.png" style="height:300px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
-<p>More about it in the blog: <a href="https://huggingface.co/blog/moe"><strong>Mixture of Experts Explained</strong></a></p>
-<hr />
-<h3 id="model-merging-a-look-into-dare">Model Merging: A Look into DARE</h3>
-<p><strong>DARE</strong>: Introduced a simple yet impactful concept for effortlessly creating a hybrid model, by combining weights of two models from same base model finetuned on two different tasks/data. (One on Math, One on Code)</p>
-<p>In DARE first identify what so called <em>delta parameters</em> by taking difference between actual weights and finetuned weights, then pick those with small difference value may be 0.005.</p>
-<p>In Four Steps:</p>
-<ul>
-<li>Randomly pick may be 90% of those Delta parameters</li>
-<li>Drop them by resetting actual weights to zero</li>
-<li>Rescale remaining ones with <code>1/(1-p)</code> (where p is drop rate).</li>
-<li>Finally do merging with this updated weights of two or more finetuned models using any of exisiting model merging techniques.</li>
-</ul>
-<p><a class="glightbox" href="images/dare.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="DARE" src="images/dare.png" style="height:350px; width:500px; display: block;margin-left: auto;margin-right: auto;" /></a></p>
-<p>More about it in the paper: <a href="https://arxiv.org/abs/2311.03099"><strong>Language Models are Super Mario</strong></a></p>
+  <h1>Notes</h1>
+
+
 
   <hr>
 <div class="md-source-file">
